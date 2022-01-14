@@ -3,8 +3,11 @@ require_once 'constants.php';
 
 function getConnection(): PDO
 {
+  $dbConfiguration = parse_ini_file('config/db.ini');
+  $dsn = "mysql:dbname=" . $dbConfiguration['db_name'] . ";host=" . $dbConfiguration['host'] . ";charset" . $dbConfiguration['charset'];
+
   try {
-    $pdo = new PDO(DB_DSN, DB_USER, DB_PASSWORD);
+    $pdo = new PDO($dsn, $dbConfiguration['user'], $dbConfiguration['password']);
   } catch (PDOException $e) {
     echo "Erreur de connexion à la base de données<br />";
     switch ($e->getCode()) {
