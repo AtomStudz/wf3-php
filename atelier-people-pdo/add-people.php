@@ -1,9 +1,17 @@
 <?php
+require_once 'People.php';
 require_once 'services/people.php';
 require_once 'alert.php';
 
 if (isset($_POST['name']) && isset($_POST['firstname'])) {
-  $inserted = addPeople($_POST['name'], $_POST['firstname'], $_POST['birthdate']);
+  $newPeople = new People();
+  $newPeople->setName($_POST['name']);
+  $newPeople->setFirstname($_POST['firstname']);
+
+  $birthdate = $_POST['birthdate'] === '' ? null : new DateTime($_POST['birthdate']);
+  $newPeople->setBirthDate($birthdate);
+
+  $inserted = addPeople($newPeople);
 
   if ($inserted === false) {
     displayAlert(AlertLevel::DANGER, "Une erreur est survenue lors de l'enregistrement !");

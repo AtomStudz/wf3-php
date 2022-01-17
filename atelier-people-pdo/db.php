@@ -1,9 +1,10 @@
 <?php
-
 function getConnection(): PDO
 {
   $dbConfiguration = parse_ini_file('config/db.ini');
-  $dsn = "mysql:dbname=" . $dbConfiguration['db_name'] . ";host=" . $dbConfiguration['host'] . ";charset" . $dbConfiguration['charset'];
+  $dsn = "mysql:dbname=" . $dbConfiguration['db_name'] .
+    ";host=" . $dbConfiguration['host'] .
+    ";charset=" . $dbConfiguration['charset'];
 
   try {
     $pdo = new PDO($dsn, $dbConfiguration['user'], $dbConfiguration['password']);

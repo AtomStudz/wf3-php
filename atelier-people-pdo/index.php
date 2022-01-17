@@ -1,4 +1,5 @@
 <?php
+require_once 'People.php';
 require_once 'services/people.php';
 require_once "layout/header.php";
 ?>
@@ -10,7 +11,7 @@ $stmt = findAllPeopleStatement();
 ?>
 <div class="card-group">
   <?php
-  while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+  while ($row = $stmt->fetchObject('People')) {
     require 'people-card.php';
   } ?>
 </div>
